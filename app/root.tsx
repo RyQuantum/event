@@ -6,9 +6,16 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-
 import type { Route } from "./+types/root";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc"
+import timezone from "dayjs/plugin/timezone"
 import "./app.css";
+import "./utilities/api"
+import {useLoadingStore} from "~/utilities/useStore";
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -24,6 +31,9 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+
+  const { isLoading } = useLoadingStore()
+
   return (
     <html lang="en">
       <head>
@@ -32,10 +42,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className={isLoading ? "overflow-hidden" : ""}>
         {children}
         <ScrollRestoration />
         <Scripts />
+        {isLoading && (
+          <div className="fixed flex justify-center items-center top-0 left-0 w-full h-full bg-transparent z-[9999] pointer-events-auto">
+            <span className="loading loading-spinner loading-xl"></span>
+          </div>
+        )}
       </body>
     </html>
   );

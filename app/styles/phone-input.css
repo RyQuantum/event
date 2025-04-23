@@ -1,0 +1,42 @@
+.PhoneInput {
+  /* 容器样式 */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #000;
+  /*border-radius: 0.5rem;*/
+  /* padding: 0.5rem; */
+  background: white;
+  /*width: 130px; !* 添加固定宽度 *!*/
+}
+
+.PhoneInputCountry {
+  /* 国家选择部分 */
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  /*min-width: 65px; !* 减小最小宽度 *!*/
+  padding-left: 8px;
+}
+
+.PhoneInputCountrySelect {
+  /* 下拉选择框 */
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+}
+
+.PhoneInputInput {
+  /* 输入框部分 */
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  width: 100%;
+  padding: 0.25rem;
+}
+
+.PhoneInputCountryIcon {
+  /* 国旗图标 */
+  width: 1.5rem;
+  height: 1rem;
+}
