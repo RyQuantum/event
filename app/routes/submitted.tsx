@@ -1,10 +1,8 @@
-import {useCallback, useEffect, useMemo} from "react";
+import { useCallback, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router";
-import { FiUser } from "react-icons/fi";
+import { MdCalendarMonth, MdOutlineArticle, MdOutlineLocationOn, MdOutlinePersonOutline } from "react-icons/md";
 import dayjs from "dayjs";
-import {IoDocumentTextOutline, IoLocationOutline} from "react-icons/io5";
-import {FaRegCalendarAlt} from "react-icons/fa";
-import {useLoadingStore} from "~/utilities/useStore";
+import { useLoadingStore } from "~/utilities/useStore";
 
 export function meta() {
     return [
@@ -130,7 +128,7 @@ export default function Submitted() {
               Now you can use the entry code above to join <span className="font-semibold">{memberInfo.name}</span>.
             </p>
             <p className="text-base-content">
-              Wish you have a great time!
+              Hope you have a great time !
             </p>
           </div>
         </div>
@@ -138,25 +136,25 @@ export default function Submitted() {
         {/* Event details */}
         <div className="space-y-2 m-6">
           <div className="flex items-start gap-3 mt-2">
-            <FaRegCalendarAlt className="text-xl size-4 ml-1" />
+            <MdCalendarMonth className="text-xl mt-0.5" />
             <p className="w-7/8">
-              {startTime.format("MMM D, YYYY h:mm A")} - {endTime.format("MMM D, YYYY h:mm A")}&nbsp;({memberInfo.timezoneInfo})
+              {startTime.format("MMM D, YYYY h:mm A")} - {endTime.format("MMM D, YYYY h:mm A")}<br/>({memberInfo.timezoneInfo})
             </p>
           </div>
 
           <div className="flex items-start gap-3 mt-2">
-            <FiUser className="text-xl size-5" />
-            <p>Hosted by {memberInfo.nickName}&nbsp;({memberInfo.contactInfo})</p>
+            <MdOutlinePersonOutline className="text-xl mt-0.5" />
+            <p>Hosted by {memberInfo.nickName} ({memberInfo.contactInfo})</p>
           </div>
 
           <div className="flex items-start gap-3 mt-2">
-            <IoLocationOutline className="text-xl size-5" />
-            <span>{memberInfo.location || "Not Set"}</span>
+            <MdOutlineLocationOn className="text-xl mt-0.5" />
+            <span className="whitespace-pre-line">{memberInfo.location || "Not Set"}</span>
           </div>
 
           <div className="flex items-start gap-3 mt-2">
-            <IoDocumentTextOutline className="text-xl size-5" />
-            <span>{memberInfo.descriptions || "Not Set"}</span>
+            <MdOutlineArticle className="text-xl mt-0.5" />
+            <span className="whitespace-pre-line">{memberInfo.descriptions || "Not Set"}</span>
           </div>
         </div>
       </div>

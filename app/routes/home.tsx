@@ -1,14 +1,12 @@
 import type { Route } from "./+types/home";
-import {useEffect, useMemo, useRef, useState} from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from "react-router";
 import dayjs from "dayjs";
-import { FiUser } from "react-icons/fi";
-import { IoDocumentTextOutline, IoLocationOutline } from "react-icons/io5";
+import { MdCalendarMonth, MdOutlineArticle, MdOutlineLocationOn, MdOutlinePersonOutline } from "react-icons/md";
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import '../styles/phone-input.css';
-import {FaRegCalendarAlt} from "react-icons/fa";
-import {useLoadingStore} from "~/utilities/useStore";
+import { useLoadingStore } from "~/utilities/useStore";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -23,6 +21,26 @@ type UserData = {
   email: string;
   countryCode: string;
   mobile: string;
+}
+
+function Logo() {
+  return (
+    <img
+      src="/logo.png"
+      alt="sifely logo"
+      className="h-8 mx-auto mb-6"
+    />
+  )
+}
+
+function Sad() {
+  return (
+    <img
+      src="/sad.png"
+      alt="sifely logo"
+      className="h-8 mx-auto my-18"
+    />
+  )
 }
 
 export default function Home() {
@@ -91,17 +109,8 @@ export default function Home() {
   // if (true) {
     return (
       <div className="min-h-screen bg-base-100 p-6">
-        {/* Logo */}
-        <img
-          src="/logo.png"
-          alt="sifely logo"
-          className="h-8 mx-auto mb-6"
-        />
-        <img
-          src="/sad.png"
-          alt="sifely logo"
-          className="h-8 mx-auto my-18"
-        />
+        <Logo />
+        <Sad />
         <p className="text-center">Oops…Looks like this event is full. Better luck next time!</p>
       </div>
     )
@@ -110,47 +119,26 @@ export default function Home() {
   if (data?.isDelete === 1) {
     return (
       <div className="min-h-screen bg-base-100 p-4">
-        <img
-          src="/logo.png"
-          alt="sifely logo"
-          className="h-8 mx-auto mb-6"
-        />
-        <img
-          src="/sad.png"
-          alt="sifely logo"
-          className="h-8 mx-auto my-18"
-        />
+        <Logo />
+        <Sad />
         <p className="text-center">Oops…Looks like this event had been deleted. Better luck next time!</p>
       </div>
     )
   }
 
-  if (data?.memberCount! >= data?.limits!) {
+  if (Date.now() >= data?.endTime!) {
     return (
       <div className="min-h-screen bg-base-100 p-4">
-        <img
-          src="/logo.png"
-          alt="sifely logo"
-          className="h-8 mx-auto mb-6"
-        />
-        <img
-          src="/sad.png"
-          alt="sifely logo"
-          className="h-8 mx-auto my-18"
-        />
-        <p className="text-center">Oops…Thank you for your enthusiasm! We’ve reached full capacity. Better luck next time!</p>
+        <Logo />
+        <Sad />
+        <p className="text-center">Oops…Looks like this event has expired. Better luck next time!</p>
       </div>
     )
   }
 
   return (
     <div className="min-h-screen bg-base-100 p-6">
-      {/* Logo */}
-      <img
-        src="/logo.png"
-        alt="sifely logo"
-        className="h-8 mx-auto mb-6"
-      />
+      <Logo />
 
       {data && (
         <div className="space-y-2 mb-4">
@@ -162,25 +150,25 @@ export default function Home() {
           {/* Event Details */}
           <div className="space-y-2">
             <div className="flex items-start gap-3 mt-2">
-              <FaRegCalendarAlt className="text-xl size-4 ml-1" />
+              <MdCalendarMonth className="text-xl mt-0.5" />
               <p className="w-7/8">
-                {startTime.format("MMM D, YYYY h:mm A")} - {endTime.format("MMM D, YYYY h:mm A")} ({data.timezoneInfo})
+                {startTime.format("MMM D, YYYY h:mm A")} - {endTime.format("MMM D, YYYY h:mm A")}<br/>({data.timezoneInfo})
               </p>
             </div>
 
             <div className="flex items-start gap-3 mt-2">
-              <FiUser className="text-xl size-5" />
-              <p>Hosted by {data.nickName}&nbsp;({data.contactInfo})</p>
+              <MdOutlinePersonOutline className="text-xl mt-0.5" />
+              <p>Hosted by {data.nickName} ({data.contactInfo})</p>
             </div>
 
             <div className="flex items-start gap-3 mt-2">
-              <IoLocationOutline className="text-xl size-5" />
-              <span>{data.location || "Not Set"}</span>
+              <MdOutlineLocationOn className="text-xl mt-0.5" />
+              <span className="whitespace-pre-line">{data.location || "Not Set"}</span>
             </div>
 
             <div className="flex items-start gap-3 mt-2">
-              <IoDocumentTextOutline className="text-xl size-5" />
-              <span>{data.descriptions || "Not Set"}</span>
+              <MdOutlineArticle className="text-xl mt-0.5" />
+              <span className="whitespace-pre-line">{data.descriptions || "Not Set"}</span>
             </div>
           </div>
         </div>
