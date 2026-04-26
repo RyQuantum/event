@@ -3,10 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "react-router build",
     "dev": "react-router dev --host",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "build": "react-router build --mode production",
+    "build:dev": "react-router build --mode development"
   },
   "dependencies": {
     "@react-router/node": "^7.5.0",

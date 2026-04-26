@@ -1,10 +1,10 @@
 // api.ts
 import type { FormData } from './useStore';
 
-const BASE_URL =
-  process.env.NODE_ENV === 'production'
-    ? 'https://dev-app-server.sifely.com'
-    : 'https://dev-app-server.sifely.com';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL ||
+  (import.meta.env.MODE === 'production'
+    ? 'https://app-server.sifely.com'
+    : 'https://dev-app-server.sifely.com');
 
 async function request<T>(
   url: string,
